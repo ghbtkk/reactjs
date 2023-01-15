@@ -29,7 +29,7 @@
               placeholder="Minutes"
               type="number"
               onChange={onChange}
-              disabled={flipped}
+              disabled={inverted}
             />
           </div>
           <div>
@@ -60,10 +60,38 @@
       const onInvert = () => {
         reset();
         setInverted((current) => !current);
-      return
-
-      (<h3>KM to M </h3>)
-
+        return (
+          <div>
+            <h1>KM to Miles</h1>
+            <div>
+              <label htmlFor="km">Km</label>
+              <input
+                value={inverted ? amount * 1.6 : amount}
+                id="km"
+                placeholder="Km"
+                type="number"
+                onChange={onChange}
+                disabled={inverted}
+              />
+            </div>
+            <div>
+              <label htmlFor="miles">Miles</label>
+              <input
+                values={inverted ? amount : amount * 0.6213}
+                id="hours"
+                placeholder="Miles"
+                type="number"
+                onChange={onChange}
+                disabled={!inverted}
+              />
+            </div>
+            <button onClick={reset}>Reset </button>
+            <button onClick={onInverted}>
+              {inverted ? "Turn Back" : "Invert"}Flip{" "}
+            </button>
+          </div>
+        );
+      };
     }
     function App() {
       const [index, setIndex] = React.useState("xx");
@@ -81,7 +109,6 @@
           {index === "xx" ? "Please select your units" : null}
           {index === "0" ? <MinutesToHours /> : null}
           {index === "1" ? <KmToMiles /> : null}
-
         </div>
       );
     }
